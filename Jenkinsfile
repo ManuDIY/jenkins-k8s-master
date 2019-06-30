@@ -14,7 +14,7 @@ spec:
     tty: true
     volumeMounts:
       - name: jenkins-docker-cfg
-        mountPath: /root
+        mountPath: /kaniko
       - name: ca-cert
         mountPath: /kaniko/ssl/certs/my-ca.pem
         subPath: rootca
