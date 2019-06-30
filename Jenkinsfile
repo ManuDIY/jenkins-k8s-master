@@ -42,6 +42,8 @@ spec:
       container(name: 'kaniko', shell: '/busybox/sh') {
         withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
           sh '''#!/busybox/sh
+          cat /kaniko/.docker/config.json
+          cat /root/.docker/config.json
           /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --cache=true --destination=10.128.0.4:5000/jenkins-k8s-master
           '''
         }
