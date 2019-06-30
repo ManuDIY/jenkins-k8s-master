@@ -1,0 +1,104 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: jenkins-home-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: faster
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+spec:
+  ports:
+  - port: 80
+    name: jenkins-http
+    targetPort: 8080
+  - port: 50001
+    name: jenkins-jnlp
+    targetPort: 50001
+  selector:
+    app: jenkins
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: jenkins
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: jenkins
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get","list","watch"]
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: jenkins
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: jenkins
+subjects:
+- kind: ServiceAccount
+  name: jenkins
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      serviceAccountName: jenkins
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 0
+      imagePullSecrets:
+      - name: local-registry
+      containers:
+        - name: jenkins
+          image: 10.128.0.4:5000/jenkins-k8s-master:0.2
+          imagePullPolicy: Always
+          env:
+          - name: JAVA_OPTS
+            value: -Djenkins.install.runSetupWizard=false
+          - name: ADMIN_USERNAME
+            value: "admin"
+          - name: ADMIN_PASSWORD
+            value: "password"
+          ports:
+            - name: http-port
+              containerPort: 8080
+            - name: jnlp-port
+              containerPort: 50001
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+      volumes:
+      - name: jenkins-home
+        persistentVolumeClaim:
+          claimName: jenkins-home-claim
+---
