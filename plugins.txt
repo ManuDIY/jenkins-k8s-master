@@ -43,6 +43,7 @@ jquery-detached
 jquery
 jsch
 junit
+kubernetes
 mailer
 matrix-auth
 matrix-project
