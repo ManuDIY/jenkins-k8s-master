@@ -14,7 +14,7 @@ spec:
     tty: true
     volumeMounts:
       - name: jenkins-docker-cfg
-        mountPath: /kaniko
+        mountPath: /root
       - name: ca-cert
         mountPath: /kaniko/ssl/certs/my-ca.pem
         subPath: rootca
@@ -44,6 +44,7 @@ spec:
           sh '''#!/busybox/sh
           cat /kaniko/.docker/config.json
           cat /root/.docker/config.json
+          DOCKER_CONFIG=/root/.docker/
           /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --cache=true --destination=10.128.0.4:5000/jenkins-k8s-master
           '''
         }
