@@ -8,7 +8,7 @@ println "--> creating admin user"
 
 def adminUsername = System.getenv("ADMIN_USERNAME")
 def adminPassword = System.getenv("ADMIN_PASSWORD")
-assert adminPassword != null : "No ADMIN_USERNAME env var provided, but required"
+assert adminUsername != null : "No ADMIN_USERNAME env var provided, but required"
 assert adminPassword != null : "No ADMIN_PASSWORD env var provided, but required"
 
 def hudsonRealm = new HudsonPrivateSecurityRealm(false)
