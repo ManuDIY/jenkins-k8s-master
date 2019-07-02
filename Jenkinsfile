@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug-v0.10.0
+    image: gcr.io/kaniko-project/executor:debug-v0.8.0
     imagePullPolicy: Always
     command:
     - /busybox/cat
