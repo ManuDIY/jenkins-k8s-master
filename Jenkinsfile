@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug-v0.7.0
+    image: gcr.io/kaniko-project/executor:debug-v0.10.0
     imagePullPolicy: Always
     command:
     - /busybox/cat
@@ -43,7 +43,7 @@ spec:
         withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
           sh '''#!/busybox/sh
           echo "jenkins:!:1000:1000:::" >>/etc/passwd 
-          /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --cache=false --destination=10.128.0.4:5000/jenkins-k8s-master:0.4
+          /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --cache=false --destination=10.128.0.4:5000/jenkins-k8s-master:0.5
           '''
         }
       }
