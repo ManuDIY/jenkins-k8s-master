@@ -35,7 +35,6 @@ spec:
               path: .docker/config.json
 """
   ) {
-
   node(label) {
     stage('Build with Kaniko') {
       git 'https://github.com/ansilh/jenkins-k8s-master.git'
