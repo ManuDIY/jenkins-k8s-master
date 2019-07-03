@@ -1,5 +1,7 @@
-import hudson.model.*
+import jenkins.*
 import jenkins.model.*
+import hudson.*
+import hudson.model.*
 import org.csanchez.jenkins.plugins.kubernetes.*
 import org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume
 import org.csanchez.jenkins.plugins.kubernetes.volumes.HostPathVolume
@@ -36,8 +38,7 @@ try {
     //since kubernetes-1.0
 //    kc.setMaxRequestsPerHostStr(conf.kubernetes.maxRequestsPerHostStr)
  
-
-    kc = null
+//    kc = null
     println("Configuring k8s completed")
 }
 finally {

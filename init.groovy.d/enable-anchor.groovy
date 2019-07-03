@@ -11,7 +11,9 @@ ANCHOR_ENGINE_URL=http://anchore-demo-anchore-engine-api.default.svc.cluster.loc
 
 */
 import jenkins.*
+import jenkins.model.*
 import hudson.*
+import hudson.model.*
 import jenkins.model.Jenkins
 import com.anchore.jenkins.plugins.anchore.*
 

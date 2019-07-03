@@ -1,8 +1,10 @@
 /*
  * Create an admin user.
  */
+import jenkins.*
 import jenkins.model.*
-import hudson.security.*
+import hudson.*
+import hudson.model.*
 
 println "--> creating admin user"
 
