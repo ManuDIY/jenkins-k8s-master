@@ -1,4 +1,23 @@
+import org.csanchez.jenkins.plugins.kubernetes.*
 import jenkins.model.*
+import jenkins.model.Jenkins
+
+def j = Jenkins.getInstance()
+
+def k = new KubernetesCloud(
+  'kubernetes',
+  null,
+  '',
+  'default',
+  'http://jenkins',
+  '10', 0, 0, 5
+)
+k.setSkipTlsVerify(true)
+
+j.clouds.replace(k)
+j.save()
+
+/*import jenkins.model.*
 import hudson.model.*
 import org.csanchez.jenkins.plugins.kubernetes.*
 //import org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume
@@ -37,4 +56,4 @@ def kc
 //finally {
     //if we don't null kc, jenkins will try to serialise k8s objects and that will fail, so we won't see actual error
 //    kc = null
-//}
+//}*/
