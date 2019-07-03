@@ -43,9 +43,9 @@ spec:
         withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
           sh '''#!/busybox/sh
           echo "jenkins:!:1000:1000:::" >>/etc/passwd
-          echo "SSL_CERT_DIR $SSL_CERT_DIR"
+          echo "SSL_CERT_DIR ${SSL_CERT_DIR}"
           export SSL_CERT_FILE=/kaniko/ssl/certs/my-ca.pem
-          echo "SSL_CERT_FILE ${SSL_CERT_FILE"
+          echo "SSL_CERT_FILE ${SSL_CERT_FILE}"
           /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --cache=false --destination=10.128.0.4:5000/jenkins-k8s-master:0.5
           '''
         }
