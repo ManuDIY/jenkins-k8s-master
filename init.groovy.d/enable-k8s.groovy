@@ -5,7 +5,7 @@ import jenkins.model.Jenkins
 def j = Jenkins.getInstance()
 
 def k = new KubernetesCloud(
-  'kubernetes',
+  'Kubernetes',
   null,
   '',
   'default',
