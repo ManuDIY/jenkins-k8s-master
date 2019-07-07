@@ -1,3 +1,5 @@
+#!groovy
+
 /*
  * Create an admin user.
  */

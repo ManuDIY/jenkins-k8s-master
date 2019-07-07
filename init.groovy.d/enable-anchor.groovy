@@ -1,3 +1,5 @@
+#!groovy
+
 /* 
 Anchor Engine configuration
 Author: Ansil H

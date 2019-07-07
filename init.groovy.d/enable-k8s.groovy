@@ -1,3 +1,5 @@
+#!groovy
+
 /*
 Enable Kubernetes plugin along with Jenkins URL for slaves 
 */
