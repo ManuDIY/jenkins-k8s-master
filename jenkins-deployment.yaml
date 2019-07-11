@@ -1,3 +1,4 @@
+kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: jenkins-home-claim
@@ -75,11 +76,11 @@ spec:
       securityContext:
         fsGroup: 1000
         runAsUser: 0
-      imagePullSecrets:
-      - name: local-registry
+#      imagePullSecrets:
+#      - name: local-registry
       containers:
         - name: jenkins
-          image: 10.128.0.4:5000/jenkins-k8s-master:0.12
+          image: ansilh/jenkins-k8s-master
           imagePullPolicy: Always
           env:
           - name: JAVA_OPTS
@@ -113,3 +114,4 @@ spec:
         persistentVolumeClaim:
           claimName: jenkins-home-claim
 ---
+

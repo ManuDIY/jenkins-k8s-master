@@ -42,7 +42,7 @@ spec:
         withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
           sh '''#!/busybox/sh
           echo "jenkins:!:1000:1000:::" >>/etc/passwd
-          /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --cache=false --destination=10.128.0.4:5000/jenkins-k8s-master:0.12
+          /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --cache=false --destination=10.128.0.2:5000/jenkins-k8s-master:0.12
           '''
         }
       }
